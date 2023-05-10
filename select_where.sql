@@ -1,4 +1,5 @@
 
+-- 2023-05-09
 -- 등급이 'G 면서 ' 빌릴수 있는 기간이 7일 이상인 레코드!
 SELECT title FROM film
 WHERE rating = 'G' or rental_duration >=7;
@@ -18,7 +19,7 @@ SELECT store_id, COUNT(*)
 FROM customer
 WHERE active = 1
 GROUP BY store_id
-HAVING COUNT(*) >=300
+-- HAVING COUNT(*) >=300 -- HAVING 어떤 그룹은 뺴자 
 ORDER BY store_id;
 
 -- 3.8.1
@@ -104,6 +105,7 @@ WHERE YEAR(rental_date) NOT IN (2004,2005);
 SELECT * FROM rental
 -- WHERE date(rental_date) >= '2005-06-14' AND date(rental_date) <= '2005-06-16';
 WHERE date(rental_date) BETWEEN  '2005-06-14' and '2005-06-16';
+-- betwwen A~B
 
 
 
@@ -119,6 +121,7 @@ SELECT * FROM film
 WHERE rating IN ('G','PG');
 
 -- 제목에 pet이 포함된 영화와 같은 등급을 가진 영화가 궁금하다.
+-- Scala값 coumn값이 하나 나오는
 SELECT title, rating
  FROM film
  WHERE rating in (SELECT distinct rating FROM film 
@@ -139,6 +142,38 @@ SELECT title, rating
  -- WHERE last_name LIKE 'Q%';
  WHERE LEFT(last_name,1) = 'Q'; 
  
- SELECT  FROM customer 
- WHERE LEFT('Q',1);
+ -- amount는 판매금액, 직원별 평균 판매금액을 알고싶다.
+ SELECT  s.staff_id,s.first_name, s.last_name ,AVG(p.amount) AS avg_amount
+ FROM payment p
+ INNER JOIN staff s
+ ON s.staff_id = p.staff_id
+ GROUP BY s.staff_id ;
+ 
+ SELECT * FROM departments;
+ SELECT * FROM dept_emp;
+ SELECT * FROM employees;
+ SELECT * FROM salaries;
+ SELECT * FROM titles;
+ 
+ -- 직원아이디, 이름,성,현재부서가 어딘지 알고싶음 !
+ 
+ SELECT  emp.emp_no,  emp.first_name,  emp.last_name, den.dept_name
+ FROM employees emp
+ inner join dept_emp de
+ ON emp.emp_no = de.emp_no
+ inner JOIN departments den
+ ON de.dept_no = den.dept_no
+ WHERE date(de.to_date) = '9999-01-01' 
+ ORDER BY emp_no;
+ -- 직원:부서= 1:N
+
+ 
+  -- 직원 남녀 숫자 알고싶음!
+ SELECT gender, count(*)
+ FROM employees
+ GROUP BY gender;
+ 
+ 
+ 
+ 
  
