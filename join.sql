@@ -17,10 +17,13 @@ SELECT * FROM customer;
 SELECT last_name, first_name, email
 from customer
 -- WHERE LEFT(last_name, 1) = 'Q' OR last_name LIKE 'Y%';
-WHERE last_name REGEXP '^[LY]'; -- QY로 시작하는 성을 찾고싶다.
+WHERE last_name REGEXP '^[LY]'; -- QY로 시작하는 성을 찾고싶다. ^이 시작값 찾기
 
 SELECT * FROM customer
-WHERE last_name REGEXP '[LY]$';
+WHERE last_name REGEXP '[LY]$'; -- ly로 $가 끝값 찾기
+
+SELECT * FROM customer
+WHERE email REGEXP '^rosa';
 
 SELECT * FROM rental;
 WHERE return_date IS not NULL;
@@ -88,17 +91,18 @@ ON a.city_id = ci.city_id;
 SELECT  * FROM customer
 WHERE address_id in(SELECT address_id
 FROM address
-WHERE district = 'California');
+WHERE district = 'California'); 
 
 SELECT * FROM customer A
 INNER JOIN address B
 ON A.address_id = B.address_id
 WHERE B.district='California';
 
-SELECT  * FROM customer A
+SELECT  * FROM customer A -- 서브쿼리(column 값은 Scala값.
 INNER join(SELECT address_id
 FROM address
-WHERE district = 'California') B
+WHERE district = 'California'
+) B
 ON A.address_id = B.address_id;
 
 -- 배우 이름이 Cate MCQueen, CUBA BIRCH
@@ -168,3 +172,5 @@ WHERE city_id IN (
 SELECT city_id FROM address
 GROUP BY city_id
 HAVING COUNT(*) > 1);
+
+

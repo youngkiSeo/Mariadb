@@ -13,10 +13,11 @@ SELECT 1 AS num, 3 AS str;
 SELECT * FROM customer;
 SELECT * FROM actor;
 
-SELECT 'customer' as typ,first_name, last_name FROM customer
-
+SELECT 'customer' as typ,first_name, last_name 
+FROM customer
 UNION
-SELECT 'actor',first_name, last_name FROM actor
+SELECT 'actor',first_name, last_name 
+FROM actor
 ORDER BY typ,first_name;
 
 -- 배우, 고객 둘다 이름이(first_name) J or D로 시작하는 사람 리스트.
@@ -25,8 +26,7 @@ SELECT first_name, last_name from customer
 WHERE first_name REGEXP '^[JD]'
 UNION
 SELECT first_name, last_name FROM actor
-WHERE first_name REGEXP '^[JD]'
-;
+WHERE first_name REGEXP '^[JD]';
 
 SELECT T.first_name, T.last_name 
 FROM(
@@ -38,8 +38,7 @@ FROM(
 )T
  WHERE T.first_name REGEXP '^J' AND T.last_name REGEXP '^D'
  GROUP BY T.first_name, T.last_name
- HAVING COUNT(1)>1
-;
+ HAVING COUNT(1)>1;
 
 -- except
 SELECT typ,T.first_name, T.last_name 
