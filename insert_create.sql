@@ -70,3 +70,5 @@ SELECT str_to_date('DEC-21-1980', '%b-%d-%Y');
 
 DELETE FROM favorite_food;
 TRUNCATE favorite_food;
+
+SELECT * FROM person;

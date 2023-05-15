@@ -121,7 +121,7 @@ SELECT * FROM film
 WHERE rating IN ('G','PG');
 
 -- 제목에 pet이 포함된 영화와 같은 등급을 가진 영화가 궁금하다.
--- Scala값 coumn값이 하나 나오는
+-- Scala값 coumn값이 하나 나오는.
 SELECT title, rating
  FROM film
  WHERE rating in (SELECT distinct rating FROM film 
